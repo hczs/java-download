@@ -4,7 +4,11 @@ java实现多线程下载
 使用slf4j做日志打印，java.net包做网络连接，以及基本的IO流操作和多线程，实现多线程下载文件资源
 
 主要是为了复习多线程和IO操作
-
+## 效果展示
+浏览器下载，速度在 181KB/s
+![浏览器](https://user-images.githubusercontent.com/43227582/136026466-f24ba879-d535-48bd-9f55-ab8b7eef94a4.png)
+多线程下载，速度在 1.25MB/s
+![多线程](https://user-images.githubusercontent.com/43227582/136026545-3c0266fd-93da-499f-a256-f45786b60c3e.png)
 ## 基本使用
 1. 克隆本项目到本地
 2. 下载相关依赖包
