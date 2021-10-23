@@ -1,5 +1,7 @@
 package com.hc.download;
 
+import com.hc.speed.SpeedUtil;
+import com.hc.util.HttpUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

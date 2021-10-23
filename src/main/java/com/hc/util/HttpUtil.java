@@ -1,4 +1,4 @@
-package com.hc.download;
+package com.hc.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
