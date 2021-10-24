@@ -1,7 +1,7 @@
 # java-download
 java实现多线程下载
 ## 介绍
-使用slf4j做日志打印，java.net包做网络连接，以及基本的IO流操作和多线程，实现多线程下载文件资源
+使用slf4j做日志打印，java.net包做网络连接，以及基本的IO流操作和多线程，实现多线程下载文件资源，可以自动解析url中文件资源类型及文件名，无需手动设置
 
 主要是为了复习多线程和IO操作
 ## 效果展示
@@ -31,17 +31,21 @@ public static void main(String[] args) {
 ```java
     /**
      * 获取文件，根据线程数和文件大小，给每个线程分任务（就是每个线程负责下载哪一部分），提交执行下载任务
-     * 默认存D盘根目录下，以url最后一个 "/" 后面的字符串作为文件名
+     * 默认存放在当前工程的目录下，文件名默认为生成的随机UUID
      * @param urlLocation 文件下载地址
      * @param poolLength 线程数
      */
-    public static void downLoadFile(String urlLocation, int poolLength){...}
-    
+    public static void downLoadFile(String urlLocation, int poolLength) {...}
+
     /**
      * 获取文件，根据线程数和文件大小，给每个线程分任务（就是每个线程负责下载哪一部分），提交执行下载任务
      * @param urlLocation 文件下载地址
-     * @param filePath 文件本地存储路径，为空则
+     * @param filePath 文件本地存储路径，为空则存放在当前工程目录下
+     * @param fileName 文件名，为空就设置为随机生成的UUID
      * @param poolLength 线程池大小
      */
-    public static void downLoadFile(String urlLocation, String filePath, int poolLength)
+    public static void downLoadFile(String urlLocation, String filePath, String fileName, int poolLength){...}
 ```
+## 后续工作
+1. 实现下载可暂停
+2. 在性能达标后编写界面
