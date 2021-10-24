@@ -116,13 +116,26 @@ public class DownloadThreadPool {
      * @param fileName 文件名
      * @return 返回完整的本地文件存储的路径，当url不合法时返回null
      */
-    private static String handleFileName(HttpURLConnection connection, String filePath, String fileName) throws MimeTypeException {
-        // 获取文件扩展名
-        String contentType = connection.getContentType();
-        MimeTypes mimeTypes = MimeTypes.getDefaultMimeTypes();
+    public static String handleFileName(HttpURLConnection connection, String filePath, String fileName) throws MimeTypeException {
+        // 优先从url中获取扩展名
+        String url = connection.getURL().toString();
+        String fileNameAndExtension = url.substring(url.lastIndexOf("/") + 1);
+        String[] splitByDot = fileNameAndExtension.split("\\.");
         String extension;
-        MimeType registeredMimeType = mimeTypes.getRegisteredMimeType(contentType);
-        extension = registeredMimeType.getExtension();
+        // 只有经过"."分割后的数组长度为2，才是静态文件
+        if (splitByDot.length == 2) {
+            extension = "." + splitByDot[1];
+            fileName = splitByDot[0];
+            log.info("从url中解析到文件名为：{}", fileNameAndExtension);
+        } else {
+            // 获取文件扩展名
+            String contentType = connection.getContentType();
+            MimeTypes mimeTypes = MimeTypes.getDefaultMimeTypes();
+            MimeType registeredMimeType = mimeTypes.getRegisteredMimeType(contentType);
+            extension = registeredMimeType.getExtension();
+            log.info("从响应头中解析到下载的文件类型为：{}，扩展名：{}", contentType, extension);
+        }
+
         // 处理文件存储路径及文件名
         if (filePath != null && filePath.length() != 0) {
             log.info("检测到设置的文件路径为：{}", filePath);
