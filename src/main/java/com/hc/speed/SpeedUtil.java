@@ -75,8 +75,11 @@ public class SpeedUtil {
      */
     public static String speedUnit(long byteLength, long time) {
         double speedByte = (double) byteLength / time;
-        double speedKb = speedByte / 1024.0 / time;
-        double speedMb = speedKb / 1024.0 / time;
+        double speedKb = speedByte / 1024.0;
+        double speedMb = speedKb / 1024.0;
+        System.out.println(speedByte);
+        System.out.println(speedKb);
+        System.out.println(speedMb);
         // 注意判断顺序，优先返回大的
         if ( speedKb > 1024) {
             return String.format("%.2f", speedMb) + " MB/S";
